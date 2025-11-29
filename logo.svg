@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480">
+  <!-- Roof - Gray (#555555) -->
+  <polygon points="180,150 320,60 460,150" fill="#555555" stroke="none"/>
+  
+  <!-- Roof line detail -->
+  <line x1="180" y1="150" x2="460" y2="150" stroke="#555555" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Main house body - Red (#C41E3A) -->
+  <rect x="160" y="150" width="320" height="200" fill="#C41E3A" stroke="none"/>
+  
+  <!-- Windows - White (2x2 grid on left side) -->
+  <rect x="200" y="170" width="35" height="35" fill="white" stroke="none" rx="2"/>
+  <rect x="265" y="170" width="35" height="35" fill="white" stroke="none" rx="2"/>
+  <rect x="200" y="235" width="35" height="35" fill="white" stroke="none" rx="2"/>
+  <rect x="265" y="235" width="35" height="35" fill="white" stroke="none" rx="2"/>
+  
+  <!-- Door - White (right side) -->
+  <rect x="370" y="210" width="60" height="140" fill="white" stroke="none" rx="2"/>
+  
+  <!-- Door handle -->
+  <circle cx="420" cy="280" r="4" fill="#555555"/>
+  
+  <!-- Foundation base -->
+  <rect x="160" y="350" width="320" height="25" fill="#C41E3A" stroke="none" rx="8"/>
+</svg>
