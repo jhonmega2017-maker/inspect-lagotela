@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lagotela - Sistema de Inspeção de Produtos</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor-glow"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img id="logo" src="assets/logo.svg" alt="Logo Lagotela" class="logo-img">
+                <div class="logo-text-wrapper">
+                    <h1 class="logo-text">LAGOTELA</h1>
+                    <p class="logo-subtitle">Cercamento Inteligente</p>
+                </div>
+            </div>
+            <nav class="nav-header">
+                <span class="nav-title">Inspeção de Produtos</span>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section com Parallax -->
+    <section class="hero">
+        <div class="hero-background">
+            <svg class="hero-svg" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice">
+                <!-- Ondas de fundo -->
+                <defs>
+                    <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#E50914;stop-opacity:0.1" />
+                        <stop offset="100%" style="stop-color:#E50914;stop-opacity:0.05" />
+                    </linearGradient>
+                </defs>
+                
+                <!-- Formas geométricas animadas -->
+                <circle cx="100" cy="80" r="60" fill="url(#heroGradient)" class="shape-float" style="animation-delay: 0s;"></circle>
+                <circle cx="1100" cy="320" r="80" fill="url(#heroGradient)" class="shape-float" style="animation-delay: 1s;"></circle>
+                <path d="M 0 200 Q 300 100 600 200 T 1200 200" stroke="#E50914" stroke-width="3" fill="none" opacity="0.3" class="wave-line"></path>
+                <path d="M 0 250 Q 300 150 600 250 T 1200 250" stroke="#E50914" stroke-width="2" fill="none" opacity="0.2" class="wave-line" style="animation-delay: 0.5s;"></path>
+            </svg>
+        </div>
+        <div class="hero-content">
+            <h2>Lagotela - Cercamento Inteligente</h2>
+            <p>Sistema de Inspeção e Qualidade de Produtos</p>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Tabs Navigation com Barra de Progresso -->
+        <div class="tabs-section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="tabs-nav">
+                <button class="tab-btn active" data-tab="identificacao">
+                    <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>Identificação</span>
+                </button>
+                <button class="tab-btn" data-tab="fotos">
+                    <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                        <circle cx="12" cy="13" r="4"></circle>
+                    </svg>
+                    <span>Fotos</span>
+                </button>
+                <button class="tab-btn" data-tab="medidas">
+                    <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 3h18v18H3z"></path>
+                        <path d="M3 12h18"></path>
+                        <path d="M12 3v18"></path>
+                    </svg>
+                    <span>Medidas</span>
+                </button>
+                <button class="tab-btn" data-tab="qualidade">
+                    <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Qualidade</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Content Tabs -->
+        <div class="tabs-content">
+
+            <!-- Aba 1: Identificação -->
+            <div class="tab-pane active" data-tab="identificacao">
+                <div class="form-section">
+                    <h3>Dados da Inspeção</h3>
+
+                    <!-- Seleção de Inspetor -->
+                    <div class="form-group">
+                        <label for="inspetor">Inspetor Responsável *</label>
+                        <div class="custom-select">
+                            <select id="inspetor" required>
+                                <option value="">Selecione o inspetor...</option>
+                                <option value="jonatan">Jonatan</option>
+                                <option value="diogo">Diogo</option>
+                                <option value="geremias">Geremias</option>
+                                <option value="andre">André</option>
+                            </select>
+                            <svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- QR Code Scanner -->
+                    <div class="form-group">
+                        <label>Ler OP via QR Code</label>
+                        <button type="button" class="btn btn-secondary" id="btn-qr-scanner" style="width: 100%; margin-bottom: 1rem;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; display: inline; margin-right: 8px;">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                                <circle cx="12" cy="12" r="1"></circle>
+                            </svg>
+                            Ler QR Code da Câmera
+                        </button>
+                    </div>
+
+                    <!-- Obra/Cliente -->
+                    <div class="form-group">
+                        <label for="obra">Obra / Cliente *</label>
+                        <input type="text" id="obra" placeholder="Ex.: Condomínio Solar Azul" required>
+                    </div>
+
+                    <!-- Número da OP -->
+                    <div class="form-group">
+                        <label for="numero-op">Número da OP *</label>
+                        <input type="text" id="numero-op" placeholder="Ex.: OP-2025-001 (ou leia QR Code)" required>
+                    </div>
+
+                    <!-- Observações -->
+                    <div class="form-group">
+                        <label for="obs-identificacao">Observações</label>
+                        <textarea id="obs-identificacao" placeholder="Adicione observações gerais sobre a inspeção..." rows="4"></textarea>
+                    </div>
+
+                    <!-- Data -->
+                    <div class="form-group">
+                        <label for="data-inspecao">Data da Inspeção *</label>
+                        <input type="date" id="data-inspecao" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aba 2: Fotos -->
+            <div class="tab-pane" data-tab="fotos">
+                <div class="form-section">
+                    <h3>Documentação com Fotos</h3>
+
+                    <!-- Captura de Foto -->
+                    <div class="form-group">
+                        <label for="camera-input" class="btn-camera">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                <circle cx="12" cy="13" r="4"></circle>
+                            </svg>
+                            Capturar Foto
+                        </label>
+                        <input type="file" id="camera-input" accept="image/*" capture="environment" style="display: none;">
+                    </div>
+
+                    <!-- Galeria de Fotos -->
+                    <div class="form-group">
+                        <label>Fotos Capturadas</label>
+                        <div class="gallery" id="gallery">
+                            <p class="empty-gallery">Nenhuma foto capturada ainda</p>
+                        </div>
+                    </div>
+
+                    <!-- Observações -->
+                    <div class="form-group">
+                        <label for="obs-fotos">Observações sobre as Fotos</label>
+                        <textarea id="obs-fotos" placeholder="Descreva as fotos e detalhes relevantes..." rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aba 3: Medidas -->
+            <div class="tab-pane" data-tab="medidas">
+                <div class="form-section">
+                    <h3>Medidas do Painel</h3>
+
+                    <div id="medidas-list"></div>
+
+                    <button class="btn-secondary" id="btn-adicionar-painel">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Adicionar Painel
+                    </button>
+
+                    <!-- Observações -->
+                    <div class="form-group">
+                        <label for="obs-medidas">Observações sobre as Medidas</label>
+                        <textarea id="obs-medidas" placeholder="Detalhes e observações das medições..." rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aba 4: Qualidade -->
+            <div class="tab-pane" data-tab="qualidade">
+                <div class="form-section">
+                    <h3>Avaliação de Qualidade</h3>
+
+                    <!-- Assinatura Digital - 4 Canvas -->
+                    <div class="signatures-grid">
+                        <!-- Canvas 1: Qualidade -->
+                        <div class="signature-card">
+                            <h4>Qualidade</h4>
+                            <canvas id="canvas-qualidade" class="signature-canvas"></canvas>
+                            <div class="signature-buttons">
+                                <button class="btn-small" id="btn-clear-qualidade">Limpar</button>
+                                <button class="btn-small btn-primary" id="btn-save-qualidade">Salvar</button>
+                            </div>
+                        </div>
+
+                        <!-- Canvas 2: Corte do Arame -->
+                        <div class="signature-card">
+                            <h4>Corte do Arame</h4>
+                            <canvas id="canvas-arame" class="signature-canvas"></canvas>
+                            <div class="signature-buttons">
+                                <button class="btn-small" id="btn-clear-arame">Limpar</button>
+                                <button class="btn-small btn-primary" id="btn-save-arame">Salvar</button>
+                            </div>
+                        </div>
+
+                        <!-- Canvas 3: Eletrofusão -->
+                        <div class="signature-card">
+                            <h4>Eletrofusão</h4>
+                            <canvas id="canvas-eletrofusao" class="signature-canvas"></canvas>
+                            <div class="signature-buttons">
+                                <button class="btn-small" id="btn-clear-eletrofusao">Limpar</button>
+                                <button class="btn-small btn-primary" id="btn-save-eletrofusao">Salvar</button>
+                            </div>
+                        </div>
+
+                        <!-- Canvas 4: Dobra -->
+                        <div class="signature-card">
+                            <h4>Dobra</h4>
+                            <canvas id="canvas-dobra" class="signature-canvas"></canvas>
+                            <div class="signature-buttons">
+                                <button class="btn-small" id="btn-clear-dobra">Limpar</button>
+                                <button class="btn-small btn-primary" id="btn-save-dobra">Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conformidade -->
+                    <div class="form-group">
+                        <label>Status do Produto *</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="conformidade" value="conforme" required>
+                                <span class="radio-custom"></span>
+                                Produto Conforme
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="conformidade" value="nao-conforme" required>
+                                <span class="radio-custom"></span>
+                                Produto Não Conforme
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Observações Finais -->
+                    <div class="form-group">
+                        <label for="obs-finais">Observações Finais</label>
+                        <textarea id="obs-finais" placeholder="Comentários finais da inspeção..." rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botões de Navegação -->
+        <div class="navigation-buttons">
+            <button class="btn-secondary" id="btn-voltar" style="display: none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                Voltar
+            </button>
+            <div class="spacer"></div>
+            <button class="btn-secondary" id="btn-limpar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 4 21 4"></polyline>
+                    <line x1="19" y1="4" x2="5" y2="20"></line>
+                </svg>
+                Limpar Tudo
+            </button>
+            <button class="btn-primary" id="btn-proximo">
+                Próximo
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Botões de Ação Final -->
+        <div class="action-buttons" id="action-buttons" style="display: none;">
+            <button class="btn-primary" id="btn-exportar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                Exportar Relatório
+            </button>
+            <button class="btn-success" id="btn-whatsapp">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.783 1.14l-.46.264L2.304 4.07l.85 2.93.365.468a9.876 9.876 0 003.285 6.053 9.822 9.822 0 001.286.78l.457.264 3.037.914.87-1.452.294-.48c.07-.119.123-.256.156-.395.025-.139.003-.293-.073-.435l-.93-2.269c-.297-.816-.98-1.408-1.84-1.408-.173 0-.341.021-.503.062-.16.04-.32.102-.471.184z"/>
+                </svg>
+                Compartilhar via WhatsApp
+            </button>
+            <button class="btn-secondary" id="btn-email">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </svg>
+                Enviar por Email
+            </button>
+            <button class="btn-secondary" id="btn-nova-inspecao">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 6 13.46 12.46 13 13 10 16 6 20 4 21 3 17 7 13 10 10 10.54 9.54 17 3 23 6"></polyline>
+                </svg>
+                Nova Inspeção
+            </button>
+        </div>
+    </main>
+
+    <!-- Modal QR Code Scanner -->
+    <div class="modal" id="qrModal">
+        <div class="modal-content qr-modal-content">
+            <div class="modal-header">
+                <h3>Leitor de QR Code - CIGAM</h3>
+                <button type="button" class="btn-close" id="closeQrModal">&times;</button>
+            </div>
+            <div class="qr-scanner-container">
+                <video id="qr-video" autoplay playsinline></video>
+                <canvas id="qr-canvas" style="display: none;"></canvas>
+                <div class="qr-guide"></div>
+            </div>
+            <div id="qr-result" class="qr-result" style="display: none;">
+                <p style="text-align: center; color: #27ae60; font-weight: 600; margin-bottom: 1rem;">✓ QR Code detectado com sucesso!</p>
+                <div id="qr-result-content" style="background: #f0f9ff; padding: 1rem; border-radius: 8px; border-left: 4px solid #C41E3A;"></div>
+            </div>
+            <div id="qr-error" class="qr-error" style="display: none; text-align: center; color: #e74c3c; padding: 1rem;">
+                <p>📷 Posicione o QR Code dentro do quadro</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Visualizar Foto -->
+    <div class="modal" id="modal-foto">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <img id="modal-foto-img" src="" alt="Foto ampliada">
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
